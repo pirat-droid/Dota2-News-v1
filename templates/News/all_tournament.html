@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="col-md-8">
+        <div class="row">
+            {% for post in page_obj %}
+                <!-- post -->
+                <div class="col-md-6">
+                    <div class="post">
+                        <div class="championships-items__item">
+                            <a href="{% url 'tournament_detail' pk=post.pk %}" class="championships-item championships-item_live">
+                                <div class="championships-item__img" style="background-image: url({{ post.logo.url }})">
+                                    {% if post.closed == False %}
+                                    <div class="championships-item__live">Идёт сейчас</div>
+                                    {% endif %}
+                                </div>
+                                <div class="championships-item__content">
+                                    <div class="championships-info">
+                                        <div class="championships-info__title">{{ post.name}}</div>
+                                        <div class="championships-info__items">
+                                            <div class="championships-info-items">
+                                                <div class="championships-info-items__item">
+                                                    <div class="championships-info-content">
+                                                        <div class="championships-info-content__text">Призовой фонд</div>
+                                                        <div class="championships-info-content__pool championships-info-content__pool_usd">
+                                                            $ {{ post.prize_pool}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- /post -->
+
+            <div class="col-md-8">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

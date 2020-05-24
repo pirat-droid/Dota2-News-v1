@@ -1,0 +1,81 @@
+{% load static %}
+<header id="header">
+    <!-- Nav -->
+    <div id="nav">
+        <!-- Main Nav -->
+        <div id="nav-fixed">
+            <div class="container">
+                <!-- logo -->
+                <div class="nav-logo">
+                    <a href="{% url 'home' %}"><h1>Dota2 News</h1></a>
+                </div>
+                <!-- /logo -->
+
+                <!-- nav -->
+                <ul class="nav-menu nav navbar-nav">
+                    <li class="cat-1"><a href="{% url 'home' %}">Главная</a></li>
+                    <li class="cat-2"><a href="{% url 'all_news' %}">Новости</a></li>
+                    <li class="cat-3"><a href="{% url 'all_stream' %}">Стримы</a></li>
+                    <li class="cat-4"><a href="{% url 'all_tournament' %}">Турниры</a></li>
+                </ul>
+                <!-- /nav -->
+
+                <!-- search & aside toggle -->
+                <div class="nav-btns">
+                    <button class="aside-btn">Рейтинг команд</i></button>
+                    <button class="search-btn"><i class="fa fa-search"></i></button>
+                    <div class="search-form">
+                        <input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
+                        <button class="search-close"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <!-- /search & aside toggle -->
+            </div>
+        </div>
+        <!-- /Main Nav -->
+
+        <!-- Aside Nav -->
+        <div id="nav-aside">
+
+            <!-- widget reiting -->
+            <div class="section-row">
+                <h3>Рейтинг команд</h3>
+                <div class="rating-widget-table">
+                {% for reiting_comand in view.get_reiting %}
+                    <div class="rating-widget-table__item">
+                        <div class="rating-widget-table-item">
+                            <a href="{% url 'comand_detail' pk=reiting_comand.comand.pk %}" class="rating-widget-table-item__img-title">
+                                <div class="rating-widget-table-item__img">
+                                    <img src="{{ reiting_comand.comand.logo.url }}" alt="Secret" class="sys-team-logo">
+                                </div>
+                                <div class="rating-widget-table-item__title">{{ reiting_comand.comand }}</div>
+                            </a>
+                            <div class="rating-widget-table-item__value">
+                                <div class="team-rate-table-points">
+                                    <div class="team-rate-table-points__move">
+                                        <div class="teams-rate-table-move teams-rate-table-move_down">
+                                            2
+                                        </div>
+                                        <div class="plus_or_minus">
+                                            <img src="{% static './img/minus.png' %}" alt="">
+                                        </div>
+                                        <div class="team-rate-table-points__value">{{ reiting_comand.reiting }}</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+            <!-- /widget reiting -->
+
+            <!-- aside nav close -->
+            <button class="nav-aside-close"><i class="fa fa-times"></i></button>
+            <!-- /aside nav close -->
+        </div>
+        <!-- Aside Nav -->
+    </div>
+    <!-- /Nav -->

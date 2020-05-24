@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="row">
+        <!-- post -->
+        {% for post in postmodel_list %}
+            <div class="col-md-6">
+                <div class="post post-thumb">
+                    <a class="post-img" href="{% url 'post_detail' pk=post.pk %}"><img src="{{ post.image.url }}" alt=""></a>
+                    <div class="post-body">
+                        <div class="post-meta">
+                            <span class="post-date">{{ post.date }}</span>
+                        </div>
+                        <h3 class="post-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <!-- /post -->
+    </div>
+{% endblock content %}
+{% block news %}
+    <div class="col-md-8">
+        <div class="row">
+            {% for post in view.get_post %}
+                <!-- post -->
+                <div class="col-md-6">
+                    <div class="post">
+                        <a class="post-img" href="{% url 'post_detail' pk=post.pk %}"><img src="{{ post.image.url }}" alt=""></a>
+                        <div class="post-body">
+                            <div class="post-meta">
+                                <span class="post-date">{{ post.date}}</span>
+                            </div>
+                            <h3 class="post-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- /post -->
+
+            <div class="clearfix visible-md visible-lg"></div>
+        </div>
+    </div>
+{% endblock news %}
+
+{% block stream %}
+    <div class="section section-grey">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-center">
+                        <h2>Игры онлайн</h2>
+                    </div>
+                </div>
+                <!-- post -->
+                {% for stream in view.get_stream %}
+                <div class="col-md-3 ">
+                    <div class="post">
+                        <iframe src="{{ stream.link }}&autoplay=false" rel="stream" site="twitch" frameborder="0" allowfullscreen="" height="178" width="320"></iframe><a href="https://www.twitch.tv/weplayesport_ru?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;"></a>
+                        <h5>{{ stream.title }}</h5>
+                    </div>
+                </div>
+                <div class="col-md-1 ">
+                </div>
+                {% endfor %}
+                <!-- /post -->
+                <div class="col-md-12">
+                    <div class="main-post">
+                        <a href="#"><h4>Ещё игры..</h4></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+
+{% endblock stream %}

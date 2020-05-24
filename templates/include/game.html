@@ -1,0 +1,48 @@
+{% load static %}
+<div class="col-md-4">
+                <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>Матчи</h2>
+                    </div>
+                    <div class="matches-items matches-items_results js-items  matches-items_authorized  active" data-category="all">
+                        {% for game in view.get_game %}
+                        <div class="matches-items__item matches-items__item_live">
+                            <div class="matches-item  matches-item_score ">
+                                <div class="matches-item__team matches-item__team_left ">
+                                    <div class="matches-item__logo-team">
+                                        <img src="{{ game.comand1.logo.url }}" width="28px" height="28px" alt="">
+
+                                    </div>
+                                    <div class="matches-item__data-team">
+                                        <div class="matches-item__name-team"><a href="{% url 'comand_detail' pk=game.comand1.pk %}">{{ game.comand1 }}</a></div>
+{#                                        <div class="matches-item__bets-percent">64%</div>#}
+                                    </div>
+                                </div>
+                                <div class="matches-item__wrapper-info">
+                                    <div class="matches-item__game-logo matches-item__game-logo_dota2">
+                                        <img src="{% static './img/dota-2.png' %}" alt="">
+                                    </div>
+                                    <div class="matches-item__game-info">
+                                        <div class="matches-item__text-info">LIVE</div>
+                                        <div class="matches-item__text-info">BO3</div>
+                                    </div>
+                                </div>
+                                <div class="matches-item__team matches-item__team_right ">
+                                    <div class="matches-item__data-team">
+
+                                        <div class="matches-item__name-team"><a href="{% url 'comand_detail' pk=game.comand2.pk %}">{{ game.comand2 }}</a></div>
+
+{#                                        <div class="matches-item__bets-percent">36%</div>#}
+                                    </div>
+                                    <div class="matches-item__logo-team">
+                                        <img src="{{ game.comand2.logo.url }}" width="28px" height="28px" alt="">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>

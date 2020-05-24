@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="col-md-8">
+        <div class="row">
+            {% for post in page_obj %}
+                <!-- post -->
+                <div class="col-md-6">
+                    <div class="post">
+                        <a class="post-img" href="{% url 'post_detail' pk=post.pk %}"><img src="{{ post.image.url }}" alt=""></a>
+                        <div class="post-body">
+                            <div class="post-meta">
+                                <span class="post-date">{{ post.date}}</span>
+                            </div>
+                            <h3 class="post-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- /post -->
+            <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+            </div>
+            <div class="clearfix visible-md visible-lg"></div>
+        </div>
+    </div>
+
+{% endblock content %}
